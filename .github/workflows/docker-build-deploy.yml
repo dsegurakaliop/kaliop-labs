@@ -27,7 +27,7 @@ jobs:
       TYPE: frontend
       COMPONENT: kalioplabs
       DOCKERHUB_USERNAME: "kalioplabs"
-      DOCKERHUB_REPO: "kalioplabs/labs"
+      DOCKERHUB_REPO: "labs"
     
     steps:
       # Step 1: Checkout the code from the repository
@@ -42,13 +42,13 @@ jobs:
       
       # Step 3: Build the Docker image from the Dockerfile in the current directory
       - name: Build the Docker image
-        run: docker build . -t ${{ env.DOCKERHUB_REPO }}:${{env.COMPONENT}}:latest -f Dockerfile
+        run: docker build . -t ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPO }}:latest -f Dockerfile
       
       # Step 4: Scan the Docker image using Trivy for vulnerabilities
       - name: Scan Docker image with Trivy
         uses: aquasecurity/trivy-action@master
         with:
-          image-ref: '${{ env.DOCKERHUB_REPO }}:${{env.COMPONENT}}:latest'
+          image-ref: '${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPO }}:latest'
           format: 'table'
           exit-code: '1'
           ignore-unfixed: true
