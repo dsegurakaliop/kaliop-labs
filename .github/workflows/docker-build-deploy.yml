@@ -56,8 +56,8 @@ jobs:
           severity: 'CRITICAL,HIGH'
 
       # Step 5: Push the built Docker image to the Scaleway registry
-      # - name: Push the Docker Image
-      #   run: docker push ${{ vars.DOCKERHUB_REPO }}:${{env.COMPONENT}}:latest
+      - name: Push the Docker Image
+        run: docker push ${{ env.DOCKERHUB_USERNAME }}/${{ env.DOCKERHUB_REPO }}:latest
 
   ##### UPDATE TAG JOBS #####
   # update-tag-frontend:
